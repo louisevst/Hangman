@@ -1,4 +1,4 @@
-const words = [
+var words = [
   "prediction",
   "perception",
   "explanation",
@@ -96,6 +96,10 @@ const hangman = document.getElementById("hangman");
 const start = document.getElementById("start");
 const popup = document.getElementById("defaultModal");
 
+if (JSON.parse(localStorage.getItem("words"))) {
+  getLocalStorage();
+}
+
 var lives = 8;
 var number = 0;
 hangman.src = hangmanImg[number];
@@ -104,10 +108,12 @@ function randomNumberInArray() {
   return Math.round(Math.random() * (words.length - 2) + 1);
 }
 //le nom à trouver
-var word = words[randomNumberInArray()];
+var num = randomNumberInArray();
+console.log(num);
+var word = words[num];
+words.splice(num, 1);
 
 var Word = word.split("");
-
 console.log(word);
 function createKeyboard() {
   for (var i = 0; i < letter.length; i++) {
@@ -127,7 +133,6 @@ function createKeyboard() {
 }
 
 function createMisteryWord() {
-  console.log(word);
   for (var i = 0; i < word.length; i++) {
     const span = document.createElement("span");
     const node = document.createTextNode(" ");
@@ -205,10 +210,17 @@ function disableKeyboard() {
   }
 }
 function restart() {
-  word = words[randomNumberInArray()];
+  setLocalStorage();
+  getLocalStorage();
+  num = randomNumberInArray();
+  console.log(num);
+  console.log(words.length);
+  word = words[num];
+  console.log(word);
   Word = word.split("");
   number = 0;
-  console.log(word);
+  words.splice(num, 1);
+  console.log(words);
   hangman.src = hangmanImg[number];
   lives = 8;
   var child = answer.lastElementChild;
@@ -231,7 +243,15 @@ function restart() {
     });
   }
 }
+function setLocalStorage() {
+  localStorage.setItem("words", JSON.stringify(words));
+}
+function getLocalStorage() {
+  words = JSON.parse(localStorage.getItem("words"));
+}
+setLocalStorage();
 addEventListener("DOMContentLoaded", () => {
+  getLocalStorage();
   createKeyboard();
   createMisteryWord();
   //adding event listener on the keyboard
