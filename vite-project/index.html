@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./src/style.css" />
+    <title>Hangman</title>
+  </head>
+  <body class="max-w-full md:px-16 md:py-5">
+    <main class="max-w-full">
+      <button title="Change word" id="restart" class="float-right py-5 pr-5">
+        <svg
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+          class="w-6 h-6 lg:w-10 lg:h-10"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+          ></path>
+        </svg>
+      </button>
+      <section class="w-full flex">
+        <div class="p-4">
+          <h1 class="text-3xl">Hangman</h1>
+          <h2 class="text-gray-400">Guess the word before it's too late!</h2>
+        </div>
+        <img class="self-end max-w-[50%] lg:max-h-80 m-auto" id="hangman" />
+      </section>
+      <section
+        id="WordToFind"
+        class="max-w-full p-0 flex flex-wrap justify-center align-middle"
+      ></section>
+      <section
+        id="keyboard"
+        class="text-center m-auto max-w-full md:max-w-md p-2"
+      ></section>
+    </main>
+    <!--
+    <section
+      id="win/loose"
+      class="m-auto fixed w-1/2 h-1/2 top-0 bottom-0 left-0 right-0 z-10 bg-purple-400 p-5 popup"
+    >
+      <p class="text-center popuptext"></p>
+      <button class="start">restart</button>
+    </section>-->
+
+    <!-- Main modal -->
+    <div
+      id="defaultModal"
+      tabindex="-1"
+      aria-hidden="true"
+      class="hidden shadow-lg m-auto fixed top-0 left-0 bottom-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal lg:pt-20"
+    >
+      <div class="relative w-full h-full max-w-2xl m-auto md:h-auto">
+        <!-- Modal content -->
+        <div
+          class="border-2 border-gray-500 relative bg-white rounded-lg shadow dark:bg-gray-700"
+        >
+          <!-- Modal header -->
+          <div
+            class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600"
+          >
+            <h3
+              class="text-xl font-semibold text-gray-900 dark:text-white"
+            ></h3>
+          </div>
+          <!-- Modal body -->
+          <div class="p-6 space-y-6">
+            <p
+              class="text-base leading-relaxed text-gray-500 dark:text-gray-400"
+            ></p>
+          </div>
+          <!-- Modal footer -->
+          <div
+            class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600"
+          >
+            <button
+              data-modal-hide="defaultModal"
+              type="button"
+              id="ok"
+              class="text-white bg-gray-500 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+            >
+              restart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./src/script.js"></script>
+  </body>
+</html>
