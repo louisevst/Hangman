@@ -6,7 +6,7 @@ A classic hangman game, part of the exercices for BeCode to discover javascript.
 
 You can click [here](https://louisevst.github.io/Hangman/) to see it live !
 
-![screenshot](https://github.com/louisevst/Hangman/blob/main/src/public/screenshot.png?raw=true)
+![screenshot](https://github.com/louisevst/Hangman/blob/main/public/screenshot.png?raw=true)
 
 ## Tech Used
 
