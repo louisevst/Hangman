@@ -95,6 +95,9 @@ const live = document.getElementById("live");
 const hangman = document.getElementById("hangman");
 const start = document.getElementById("start");
 const popup = document.getElementById("defaultModal");
+const score = document.getElementById("score");
+const wordsToFind = words.length;
+var points = 0;
 
 if (JSON.parse(localStorage.getItem("words"))) {
   getLocalStorage();
@@ -103,11 +106,11 @@ if (JSON.parse(localStorage.getItem("words"))) {
 var lives = 8;
 var number = 0;
 hangman.src = hangmanImg[number];
-//num random entre 0 et array.length-1
+
 function randomNumberInArray() {
   return Math.round(Math.random() * (words.length - 2) + 1);
 }
-//le nom à trouver
+
 var num = randomNumberInArray();
 console.log(num);
 var word = words[num];
@@ -194,6 +197,7 @@ function Win() {
     }
   }
   if (win === 0 && lives > 0) {
+    updateScore();
     popup.classList.toggle("show");
     popup.classList.remove("hidden");
     popup.querySelector("h3").innerHTML = "You won!";
@@ -209,14 +213,17 @@ function disableKeyboard() {
     button.disabled = true;
   }
 }
+function updateScore() {
+  points += 100;
+  score.innerText = `Score: ${points}`;
+}
 function restart() {
   setLocalStorage();
   getLocalStorage();
   num = randomNumberInArray();
-  console.log(num);
-  console.log(words.length);
+
   word = words[num];
-  console.log(word);
+
   Word = word.split("");
   number = 0;
   words.splice(num, 1);
@@ -245,10 +252,14 @@ function restart() {
 }
 function setLocalStorage() {
   localStorage.setItem("words", JSON.stringify(words));
+  localStorage.setItem("score", JSON.stringify(points));
 }
 function getLocalStorage() {
   words = JSON.parse(localStorage.getItem("words"));
+  points = JSON.parse(localStorage.getItem("score"));
+  score.innerText = `Score: ${points}`;
 }
+
 setLocalStorage();
 addEventListener("DOMContentLoaded", () => {
   getLocalStorage();
@@ -267,6 +278,7 @@ addEventListener("DOMContentLoaded", () => {
   };
   document.getElementById("ok").onclick = function () {
     restart();
+
     document.getElementById("defaultModal").classList.add("hidden");
     document.getElementById("defaultModal").classList.toggle("hide");
   };
