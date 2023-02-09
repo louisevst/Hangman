@@ -77,16 +77,16 @@ var letter = [
   "z",
 ];
 const hangmanImg = [
-  "/Illustration1.png",
-  "/Illustration2.png",
-  "/Illustration3.png",
-  "/Illustration4.png",
-  "/Illustration5.png",
-  "/Illustration6.png",
-  "/Illustration7.png",
-  "/Illustration8.png",
-  "/Illustration9.png",
-  "/Illustration10.png",
+  "./Illustration1.png",
+  "./Illustration2.png",
+  "./Illustration3.png",
+  "./Illustration4.png",
+  "./Illustration5.png",
+  "./Illustration6.png",
+  "./Illustration7.png",
+  "./Illustration8.png",
+  "./Illustration9.png",
+  "./Illustration10.png",
 ];
 
 const keyboard = document.getElementById("keyboard");
@@ -98,6 +98,7 @@ const popup = document.getElementById("defaultModal");
 const score = document.getElementById("score");
 const wordsToFind = words.length;
 var points = 0;
+score.innerHTML = points;
 
 if (JSON.parse(localStorage.getItem("words"))) {
   getLocalStorage();
@@ -117,7 +118,7 @@ var word = words[num];
 words.splice(num, 1);
 
 var Word = word.split("");
-console.log(word);
+
 function createKeyboard() {
   for (var i = 0; i < letter.length; i++) {
     let button = document.createElement("button");
@@ -227,7 +228,7 @@ function restart() {
   Word = word.split("");
   number = 0;
   words.splice(num, 1);
-  console.log(words);
+
   hangman.src = hangmanImg[number];
   lives = 8;
   var child = answer.lastElementChild;
