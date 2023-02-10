@@ -98,7 +98,6 @@ const popup = document.getElementById("defaultModal");
 const score = document.getElementById("score");
 const wordsToFind = words.length;
 var points = 0;
-score.innerHTML = points;
 
 if (JSON.parse(localStorage.getItem("words"))) {
   getLocalStorage();
@@ -228,7 +227,6 @@ function restart() {
   Word = word.split("");
   number = 0;
   words.splice(num, 1);
-
   hangman.src = hangmanImg[number];
   lives = 8;
   var child = answer.lastElementChild;
@@ -259,6 +257,9 @@ function getLocalStorage() {
   words = JSON.parse(localStorage.getItem("words"));
   points = JSON.parse(localStorage.getItem("score"));
   score.innerText = `Score: ${points}`;
+  if (points === null) {
+    score.innerText = "Score: 0";
+  }
 }
 
 setLocalStorage();
@@ -266,6 +267,7 @@ addEventListener("DOMContentLoaded", () => {
   getLocalStorage();
   createKeyboard();
   createMisteryWord();
+
   //adding event listener on the keyboard
   for (var i = 0; i < letter.length; i++) {
     let thisLetter = letter[i];
